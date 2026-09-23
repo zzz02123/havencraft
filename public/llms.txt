@@ -1,0 +1,24 @@
+# HavenCraft Home (Crafting Your Everyday Haven)
+> Sustainable, direct-from-manufacturer modern furniture & home essentials engineered for warm living spaces.
+
+## Overview
+HavenCraft is a direct-to-consumer & wholesale home furnishings brand operating regional fulfillment hubs across Europe (DE, FR, ES, IT), Japan (JP), and North America (US). All products are manufactured with zero-VOC finishes, FSC-certified solid woods, and OEKO-TEX Standard 100 certified textiles.
+
+## Storefront & Machine Layer Endpoints
+- Homepage: https://havencraft-home.com/
+- Product Catalog API: GraphQL Storefront API with @inContext(country, language)
+- Machine-Readable Product PDPs: `/[lang]/products/[handle].md`
+- Structured Data: Schema.org Product, Offer, AggregateRating, FAQPage, MerchantReturnPolicy
+
+## Brand Guarantees & Terms
+- Shipping: Direct local fulfillment hub dispatch within 24 hours. Express 3-5 business days delivery.
+- Pricing: All listed prices in EUR, JPY, and USD include localized taxes (VAT / Consumption Tax) and free curb shipping.
+- Trial & Returns: 30-Day in-home trial guarantee with complimentary reverse logistics return labels.
+- Structural Warranty: 2-Year structural frame and joint manufacturer warranty.
+- Sustainability: 100% FSC-certified European Oak & Birch, non-toxic organic oil finishes, CARB Phase 2 compliant.
+
+## Top Catalog Handles
+- `nordic-oak-lounger`: HavenCraft Warm Oak Ergonomic Accent Lounge Chair
+- `artisan-extendable-dining-table`: HavenCraft Solid White Oak Extendable Dining Table
+- `wool-throw-blanket`: HavenCraft Organic Virgin Wool Tactile Throw Blanket
+- `scandinavian-cloud-sofa`: HavenCraft Minimalist Modular 3-Seater Cloud Sofa

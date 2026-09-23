@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-primary: #FAF8F5;
+    --text-primary: #2B2D42;
+    --brand-accent: #5F6B52;
+    --cta-color: #D96B43;
+    --card-bg: #F2ECE4;
+    --border-color: #E2D9CC;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  h1, h2, .font-serif-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}

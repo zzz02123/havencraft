@@ -1,0 +1,6 @@
+{
+  "name": "HavenCraft | Warm Home & Furniture Storefront",
+  "description": "HavenCraft is a high-converting home & living storefront engineered with multi-level mega navigation, 12-section CRO PDP architecture, room-fit calculators, and machine-readable AI agent layers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
