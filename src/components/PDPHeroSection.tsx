@@ -69,7 +69,13 @@ export const PDPHeroSection: React.FC<PDPHeroSectionProps> = ({
             In Stock at {product.warehouseLocation}
           </span>
           <span className="text-[#2B2D42]/40">·</span>
-          <span className="text-[#D96B43] font-bold">Only {product.stockCount} left</span>
+          <span className="text-[#D96B43] font-bold">
+            {product.stockCount > 0 && product.stockCount <= 5
+              ? `Only ${product.stockCount} left`
+              : product.stockCount > 0
+                ? 'In stock'
+                : 'Out of stock'}
+          </span>
         </div>
       </div>
 
@@ -156,7 +162,8 @@ export const PDPHeroSection: React.FC<PDPHeroSectionProps> = ({
             {product.tagline}
           </p>
 
-          {/* Star Rating with Review Trigger */}
+          {/* Star Rating with Review Trigger — hidden while a product has no reviews yet */}
+          {product.reviewCount > 0 && (
           <div className="flex items-center gap-2 mb-5 pb-4 border-b border-[#E2D9CC]/60 text-xs">
             <div className="flex items-center text-amber-500">
               {[...Array(5)].map((_, i) => (
@@ -172,6 +179,7 @@ export const PDPHeroSection: React.FC<PDPHeroSectionProps> = ({
               {product.reviewCount} Verified Home Reviews
             </button>
           </div>
+          )}
 
           {/* Pricing Display */}
           <div className="bg-[#FAF8F5] border border-[#E2D9CC] rounded-xl p-4 mb-5">

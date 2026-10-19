@@ -79,6 +79,9 @@ export interface HavenCraftProductPDP {
   bundleItem?: CrossSellBundleItem;
   stockCount: number;
   warehouseLocation: string;
+  /** Shopify ProductVariant GID — required to build a real checkout. */
+  variantId?: string;
+  availableForSale?: boolean;
 }
 
 export interface CartItem {

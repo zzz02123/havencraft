@@ -27,14 +27,21 @@ export const CategoryBrowseView: React.FC<CategoryBrowseViewProps> = ({
       maximumFractionDigits: isJpy ? 0 : 2,
     })}`;
 
+  // Mega-menu slug -> PDP room category (real catalogue uses patio/bedroom/office too)
+  const SLUG_TO_ROOM: Record<string, 'living' | 'dining' | 'bedroom' | 'patio' | 'office'> = {
+    'living-room': 'living',
+    'dining-kitchen': 'dining',
+    bedroom: 'bedroom',
+    'patio-garden': 'patio',
+    'home-office': 'office',
+  };
+
   let filtered = products;
   if (categorySlug !== 'all') {
     if (categorySlug === 'weekly-deals') {
       filtered = products.filter((p) => p.compareAtPrice && p.compareAtPrice > p.price);
-    } else if (categorySlug === 'living-room') {
-      filtered = products.filter((p) => p.roomCategory === 'living');
-    } else if (categorySlug === 'dining-kitchen') {
-      filtered = products.filter((p) => p.roomCategory === 'dining');
+    } else if (SLUG_TO_ROOM[categorySlug]) {
+      filtered = products.filter((p) => p.roomCategory === SLUG_TO_ROOM[categorySlug]);
     }
   }
 
@@ -153,11 +160,13 @@ export const CategoryBrowseView: React.FC<CategoryBrowseViewProps> = ({
             {/* Content area */}
             <div className="p-5 flex-1 flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-1 text-amber-500 text-xs mb-1.5">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  <span className="font-bold text-[#2B2D42]">{prod.rating}</span>
-                  <span className="text-[#2B2D42]/40">({prod.reviewCount})</span>
-                </div>
+                {prod.reviewCount > 0 && (
+                  <div className="flex items-center gap-1 text-amber-500 text-xs mb-1.5">
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                    <span className="font-bold text-[#2B2D42]">{prod.rating}</span>
+                    <span className="text-[#2B2D42]/40">({prod.reviewCount})</span>
+                  </div>
+                )}
 
                 <h3
                   onClick={() => onSelectProduct(prod)}

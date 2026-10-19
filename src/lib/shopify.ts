@@ -8,7 +8,8 @@ export interface ShopifyContext {
   language: string; // e.g., 'DE', 'JA', 'EN', 'FR'
 }
 
-export const SHOPIFY_STORE_DOMAIN = 'havencraft-home.myshopify.com';
+export const SHOPIFY_STORE_DOMAIN =
+  (import.meta as any).env?.VITE_SHOPIFY_SHOP_DOMAIN || 'td5kxa-2d.myshopify.com';
 
 /**
  * Core GraphQL query template fetching Product Detail Page (PDP) data

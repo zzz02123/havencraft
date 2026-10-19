@@ -10,6 +10,9 @@ interface CartDrawerProps {
   onUpdateQuantity: (idx: number, newQty: number) => void;
   onRemoveItem: (idx: number) => void;
   onClearCart: () => void;
+  onCheckout: () => Promise<void>;
+  isCheckingOut: boolean;
+  checkoutError: string | null;
 }
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({
@@ -20,11 +23,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   onUpdateQuantity,
   onRemoveItem,
   onClearCart,
+  onCheckout,
+  isCheckingOut,
+  checkoutError,
 }) => {
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [orderConfirmed, setOrderConfirmed] = useState(false);
+  const orderConfirmed = false; // real checkout redirects to Shopify, so this screen is only legacy
 
   if (!isOpen) return null;
 
@@ -50,13 +55,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     }
   };
 
-  const handleSimulateCheckout = () => {
-    setIsCheckingOut(true);
-    setTimeout(() => {
-      setIsCheckingOut(false);
-      setOrderConfirmed(true);
-      onClearCart();
-    }, 1200);
+  // Hands the basket to Shopify's hosted checkout (cartCreate -> checkoutUrl).
+  const handleCheckoutClick = async () => {
+    await onCheckout();
   };
 
   return (
@@ -118,10 +119,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   <div><strong>Trial:</strong> 30-Day In-Home Guarantee</div>
                 </div>
                 <button
-                  onClick={() => {
-                    setOrderConfirmed(false);
-                    onClose();
-                  }}
+                  onClick={() => onClose()}
                   className="mt-4 py-2.5 px-6 bg-[#5F6B52] text-white text-xs font-bold rounded-lg cursor-pointer"
                 >
                   Continue Browsing
@@ -246,12 +244,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
               {/* Checkout Button */}
               <button
-                onClick={handleSimulateCheckout}
+                onClick={handleCheckoutClick}
                 disabled={isCheckingOut}
                 className="w-full py-3.5 px-4 bg-[#D96B43] hover:bg-[#C05732] active:scale-[0.99] text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 {isCheckingOut ? (
-                  <span>Securing Order with Local Warehouse...</span>
+                  <span>Creating secure Shopify checkout…</span>
                 ) : (
                   <>
                     <Lock className="w-4 h-4" />
@@ -260,6 +258,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   </>
                 )}
               </button>
+
+              {checkoutError && (
+                <div className="text-[11px] text-rose-700 bg-rose-50 border border-rose-200 rounded-lg px-3 py-2">
+                  {checkoutError}
+                </div>
+              )}
 
               <div className="flex items-center justify-center gap-2 text-[11px] text-[#2B2D42]/60 pt-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
